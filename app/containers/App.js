@@ -1,16 +1,18 @@
 // @flow
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as TwitchAPIActions from '../actions/twitchAPI';
+import App from '../components/App';
 
-export default class App extends Component {
-  props: {
-    children: HTMLElement
+function mapStateToProps(state) {
+  return {
+    twitchAPI: state.twitchAPI
   };
-
-  render() {
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    );
-  }
 }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(TwitchAPIActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

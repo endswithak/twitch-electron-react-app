@@ -1,7 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import styles from './Counter.css';
+import styles from './Counter.sass';
+import Button from 'react-md/lib/Buttons';
 
 class Counter extends Component {
   props: {
@@ -18,7 +19,7 @@ class Counter extends Component {
       <div>
         <div className={styles.backButton}>
           <Link to="/">
-            <i className="fa fa-arrow-left fa-3x" />
+            <Button floating>home</Button>
           </Link>
         </div>
         <div className={`counter ${styles.counter}`}>

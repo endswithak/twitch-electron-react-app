@@ -5,7 +5,14 @@ import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
 import configureStore from './store/configureStore';
-import './app.global.css';
+import WebFontLoader from 'webfontloader';
+import './app.global.sass';
+
+WebFontLoader.load({
+  google: {
+    families: ['Roboto:300,400,500,700', 'Material Icons'],
+  },
+});
 
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);
