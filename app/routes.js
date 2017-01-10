@@ -1,19 +1,26 @@
 // @flow
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import App from './containers/App';
-import HomePage from './containers/HomePage';
-import CounterPage from './containers/CounterPage';
-import Games from './containers/GamesWrap';
-import Channels from './containers/ChannelsWrap';
-import Videos from './containers/VideosWrap';
-import Following from './containers/FollowingWrap';
+import AppWrap from './containers/AppWrap';
+import requiresAuth from './containers/requiresAuth';
+import GamesWrap from './containers/GamesWrap';
+import ChannelsWrap from './containers/ChannelsWrap';
+import FollowingWrap from './containers/FollowingWrap';
+import GameStreamsWrap from './containers/GameStreamsWrap';
+import ChannelPageWrap from './containers/ChannelPageWrap';
+import CommunitiesWrap from './containers/CommunitiesWrap';
+import CommunityStreamsWrap from './containers/CommunityStreamsWrap';
+import ClipsWrap from './containers/ClipsWrap';
 
 export default (
-  <Route path="/" component={App}>
-    <IndexRoute component={Games} />
-    <Route path="/channels" component={Channels} />
-    <Route path="/videos" component={Videos} />
-    <Route path="/following" component={Following} />
+  <Route path="/" component={AppWrap}>
+    <IndexRoute component={GamesWrap} title="Games" />
+    <Route path="/games/:gameName" component={GameStreamsWrap} />
+    <Route path="/channels" component={ChannelsWrap} />
+    <Route path="/channels/:channelId" component={ChannelPageWrap} />
+    <Route path="/following" component={requiresAuth(FollowingWrap, true, '/')} />
+    <Route path="/communities" component={CommunitiesWrap} />
+    <Route path="/communities/:communityId" component={CommunityStreamsWrap} />
+    <Route path="/clips" component={ClipsWrap} />
   </Route>
 );

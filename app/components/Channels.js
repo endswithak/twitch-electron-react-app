@@ -1,15 +1,20 @@
 // @flow
 import React, { Component } from 'react';
-import StreamCard from './StreamCard';
+import StreamGrid from './StreamGrid';
+import Directory from './Directory'
 
 export default class Channels extends Component {
   render() {
     return (
-      <div>
-        <div className="md-grid">
-          {this.props.streams.map((stream, index) => <StreamCard {...this.props} key={index} index={index} stream={stream} />)}
-        </div>
-      </div>
-    );
+      <Directory title="Channels"
+                 loading={this.props.twitchStreams.loading}
+                 error={this.props.twitchStreams.error}>
+
+        <StreamGrid hasMore={this.props.twitchStreams.total > this.props.twitchStreams.streams.length}
+                    streams={this.props.twitchStreams.streams}
+                    loadMore={this.props.moreStreams} />
+
+      </Directory>
+    )
   }
 }

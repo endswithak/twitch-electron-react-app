@@ -1,18 +1,132 @@
-// @import "~font-awesome/css/font-awesome.css"
-// @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700')
+@import './reset'
 @import '~react-md/src/scss/react-md'
 
+$md-light-theme: false;
+$md-primary-color: $md-deep-purple-a-100;
+$md-secondary-color: $md-deep-purple-a-100;
 
-$md-primary-color: $md-deep-purple-500;
-$md-secondary-color: $md-blue-500;
+md-deep-purple-500
 
 // Include all components
 @include react-md-everything;
 
+// emote selector
+#emote-selectorList
+  bottom: 48px
+  max-height: 200px
+  overflow-y: scroll
+  top: initial
+
+// for logged-in user avatar account menu
+#account-menuList
+  right: 0
+  width: auto
+  left: auto
+
+// for ellipsis stuff
+=ellipsis
+  overflow: hidden
+  text-overflow: ellipsis
+  display: -webkit-box
+  -webkit-line-clamp: 1
+  -webkit-box-orient: vertical
+
+=ellipsis-block
+  overflow: hidden
+  text-overflow: ellipsis
+  display: -webkit-box
+  -webkit-line-clamp: 3
+  -webkit-box-orient: vertical
+
+.ellipsis-block
+  +ellipsis-block
+
+.ellipsis
+  +ellipsis
+
+
+// makes the card titles smaller
+.md-card-title--ellipsis
+
+  .md-card-title--large
+    font-size: 14px
+    +ellipsis
+
+  .md-text--secondary
+    +ellipsis
+
+.md-card-title--ellipsis-block
+
+  .md-card-title--large
+    font-size: 14px
+    +ellipsis-block
+
+  .md-text--secondary
+    +ellipsis-block
+
+
+// boxart aspect ratio
 .md-media--3-4
   padding-bottom: calc(4/3 * 100%)
 
+// boxart avatar
+.md-avatar-boxart
+  border-radius: 0
+  height: 54px
+  width: 40px
 
+  &.md-avatar-boxart--large
+    height: 70px
+    width: 51px
+    position: relative
+    top: 3px
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4)
+    border: 0
 
-.md-card-title--large
-  font-size: 16px
+    .md-avatar-boxart
+      height: 70px
+      width: 51px
+
+  &.md-avatar-boxart--iconSized
+    height: 40px
+    width: 28px
+
+.md-avatar-boxart--wrap
+  border: 0
+
+// emotes
+.emoticon
+  background-position: center center
+  background-repeat: no-repeat
+  margin: -5px 0
+  display: inline-block
+  vertical-align: middle !important
+  height: 1.5em
+
+.md-tab--active
+  color: $md-deep-purple-a-100
+
+.md-drawer--mini
+  z-index: 14
+
+  .md-toolbar-relative
+    margin-top: 128px
+
+.md-tab
+  min-width: 0
+  max-width: 100px
+
+.md-toolbar--sub
+  z-index: 14
+
+  .md-title
+    margin-left: 90px
+
+  @media screen and (min-width: 320px)
+    margin-top: 56px
+
+  @media screen and (min-width: 320px) and (orientation: landscape)
+    margin-top: 48px
+
+  @media screen and (min-width: 768px)
+    margin-top: 64px

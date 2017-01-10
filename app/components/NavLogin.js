@@ -1,32 +1,17 @@
 // @flow
 import React, { Component } from 'react';
 import Button from 'react-md/lib/Buttons/Button';
-import Avatar from 'react-md/lib/Avatars';
-import MenuButton from 'react-md/lib/Menus/MenuButton';
-import ListItem from 'react-md/lib/Lists/ListItem';
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
+import NavAvatar from './NavAvatar';
 
 export default class NavLogin extends Component {
-  props: {
-    login: () => void,
-    logout: () => void,
-    twitchAPI: Object
-  }
   render() {
-    const {twitchAPI, login, logout} = this.props;
-    return (
-      <div>
-        {twitchAPI.status.authenticated ?
-          <Button raised
-                  secondary
-                  label="Logout"
-                  onClick={() => logout()} />
-          :
-          <Button raised
-                  secondary
-                  label="Login"
-                  onClick={() => login()} />
-        }
-      </div>
-    );
+    if (this.props.twitchStatus.status.authenticated) {
+      return (
+        <NavAvatar twitchUser={this.props.twitchUser} router={this.props.router} logout={this.props.logout} />
+      )
+    }
+    return <LoginButton login={this.props.login} />
   }
 }

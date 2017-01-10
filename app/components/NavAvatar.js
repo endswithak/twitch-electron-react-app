@@ -1,33 +1,35 @@
 // @flow
 import React, { Component } from 'react';
-import Avatar from 'react-md/lib/Avatars';
 import MenuButton from 'react-md/lib/Menus/MenuButton';
 import ListItem from 'react-md/lib/Lists/ListItem';
+import CircularProgress from 'react-md/lib/Progress/CircularProgress';
+import UserAvatar from './UserAvatar';
+import FontIcon from 'react-md/lib/FontIcons';
 
 export default class NavAvatar extends Component {
-  props: {
-    twitchAPI: Object,
-    logout: () => void
-  };
   render() {
-    const {twitchAPI, logout} = this.props;
-    const avatar = (
-      twitchAPI.channel.logo ?
-      <Avatar src={twitchAPI.channel.logo} role="presentation" iconSized />
-      :
-      <Avatar iconSized>{twitchAPI.channel.name.charAt(0).toUpperCase()}</Avatar>
-    );
+    if (this.props.twitchUser.loading) {
+      return <CircularProgress id="loading-user" />
+    }
     return (
-      <MenuButton
-        id="account-menu"
-        label={twitchAPI.channel.display_name}
-        flat
-        buttonChildren={avatar}
-        iconBefore={false}
-      >
-        <ListItem waitForInkTransition primaryText="Logout" onClick={() => logout()} />
-        <ListItem primaryText="Not You?" />
+      <MenuButton id="account-menu"
+                  className="md-btn--toolbar"
+                  tooltipLabel={this.props.twitchUser.user.display_name}
+                  icon
+                  position={MenuButton.Positions.BELOW}
+                  buttonChildren={
+                    <UserAvatar logo={this.props.twitchUser.user.logo}
+                                username={this.props.twitchUser.user.display_name}
+                                iconSized={true}
+                                style={{fontFamily: '"Roboto", sans-serif'}} />
+                  }>
+        <ListItem primaryText="Logout"
+                  leftIcon={<FontIcon>exit_to_app</FontIcon>}
+                  onClick={() => this.props.logout()} />
+        <ListItem primaryText="Channel"
+                  leftIcon={<FontIcon>account_box</FontIcon>}
+                  onClick={() => this.props.router.push(`/channels/${encodeURIComponent(this.props.twitchUser.user._id)}`)} />
       </MenuButton>
-    );
+    )
   }
 }

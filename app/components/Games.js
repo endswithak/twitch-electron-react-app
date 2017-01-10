@@ -1,13 +1,28 @@
 // @flow
 import React, { Component } from 'react';
-import GameCard from './GameCard';
+import GameGrid from './GameGrid';
+import Directory from './Directory';
 
-export default class Games extends Component {
+class Games extends Component {
   render() {
     return (
-      <div className="md-grid">
-        {this.props.games.map((game, index) => <GameCard {...this.props} key={index} index={index} game={game} />)}
-      </div>
-    );
+      <Directory
+        title="Games"
+        loading={this.props.twitchTopGames.loading}
+        error={this.props.twitchTopGames.error}>
+
+        <GameGrid hasMore={this.props.twitchTopGames.total > this.props.twitchTopGames.games.length}
+                  games={this.props.twitchTopGames.games}
+                  loadMore={this.props.getMoreTopGames} />
+
+      </Directory>
+    )
   }
 }
+
+Games.propTypes = {
+  twitchTopGames: React.PropTypes.object,
+  getMoreTopGames: React.PropTypes.func
+}
+
+export default Games;
